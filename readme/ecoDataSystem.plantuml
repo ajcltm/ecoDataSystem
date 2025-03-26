@@ -1,0 +1,191 @@
+@startuml
+
+' ========= interface =========
+
+interface Data {
+    +data:list[any]
+    +get_dataframe():DataFrame
+}
+
+interface SaveData {
+    +saveNo:int
+    +data:Data
+}
+
+interface DataSource {
+    +get_datasource()
+}
+
+interface Extractor {
+    +datasource:DataSource
+    +parse():Data
+    +extract():Data
+}
+
+interface Transformer {
+    +transform(data:Data):Data
+}
+
+interface DataSaver {
+    +save(saveData:SaveData)
+}
+
+interface Loader {
+    +datasaver:DataSaver
+    +load(saveData:SaveData)
+}
+
+interface DoneChecker {
+    +datasource:DataSource
+    +check_done():bool
+}
+
+' ========= data =========
+
+class Corpcode {
+    +corpcode:str
+    +corpname:str
+    +stockcode:str
+}
+
+class Majorcorp {
+    +corpgroup:str
+    +corpname:str
+}
+
+class CorpcodeData implements Data {
+    +data:list[Corpcode]
+    +get_dataframe():DataFrame
+}
+
+class MajorcorpData implements Data {
+    +data:list[Majorcorp]
+    +get_dataframe():DataFrame
+}
+
+
+' ========= data source =========
+
+class APIDataSource implements DataSource {
+    +url : str
+    +params : dict
+    +get_datasource()
+}
+
+class FileDataSource implements DataSource {
+    +file_path:Path
+    +get_datasource()
+}
+
+
+' ========= extractor =========
+
+class CorpcodeExtractor implements Extractor {
+    +datasource:DataSource
+    +parse():Data
+    +extract():Data
+}
+
+class MajorcorpExtractor implements Extractor {
+    +datasource:DataSource
+    +parse():Data
+    +extract():Data
+}
+
+' ========= transformer =========
+
+class CorpcodeTransformer implements Transformer {
+    +transform(data:Data):Data
+}
+
+class MajorcorpTransformer implements Transformer {
+    +transform(data:Data):Data
+}
+
+' ========= loader =========
+
+class CorpcodeLoader implements Loader {
+    + datasaver:DataSaver
+    + load(saveData:SaveData)
+}
+
+class MajorcorpLoader implements Loader {
+    + datasaver:DataSaver
+    + load(saveData:SaveData)
+}
+
+' ========= ETL pipeline =========
+
+class ETLPipeline {
+    + extractor:Extractor
+    + transform : Transformer
+    + loader : Loader
+    + run()
+}
+
+' ========= ETL pipeline builder =========
+
+class ETLPipelineBuilder {
+    + get_Corpcode_ETL()
+    + get_Majorcorp_ETL()
+}
+
+' ========= ETL pipeline processor =========
+
+class ETLPipelineProcessor {
+    +data:Data
+    +ETLPipeline:ETLPipeline
+    +done_checker:DoneChecker
+    +run()
+}
+
+' ========= DoneChecker =========
+
+class CorpcodeDoneChecker implements DoneChecker {
+    +datasource:DataSource
+    +check_done():bool
+}
+
+class MajorcorpDoneChecker implements DoneChecker {
+    +datasource:DataSource
+    +check_done():bool
+}
+
+' ========= DBConstructor =========
+
+class DBConstructor {
+    +construct_corpcode_db(dbsetNo:int, loadType:str)
+    +construct_majorcorp_db(dbsetNo:int, loadType:str)
+}
+
+' ========= relation =========
+
+DataSource <|... APIDataSource
+DataSource <|... FileDataSource
+
+Extractor <|... CorpcodeExtractor
+Extractor <|... MajorcorpExtractor
+
+DataSource <--- Extractor : use
+DataSaver <--- Loader : use
+
+Transformer <|... CorpcodeTransformer
+Transformer <|... MajorcorpTransformer
+
+Loader <|... CorpcodeLoader
+Loader <|... MajorcorpLoader
+
+Extractor <--- ETLPipeline : use
+Transformer <--- ETLPipeline : use
+Loader <--- ETLPipeline : use
+
+ETLPipeline <--- ETLPipelineBuilder : use
+
+DataSource <--- CorpcodeDoneChecker : use
+DataSource <--- MajorcorpDoneChecker : use
+
+ETLPipeline <--- ETLPipelineProcessor : use
+Data <--- ETLPipelineProcessor : use
+DoneChecker <--- ETLPipelineProcessor : use
+
+@enduml

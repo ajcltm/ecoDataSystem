@@ -1,0 +1,27 @@
+ecoDataSystem
+ |-data
+  |-raw
+  |-ods
+  |-dw
+  |-dm
+ |-src
+  |-analysis
+  |-etl
+   |-extract
+    |-DataSourceExtractor.py
+    |-Extractor.py
+    |-ExtractorFromApi.py
+    |-ExtractorFromFile.py
+    |-ExtractorCorpcode.py
+    |-ExtractorMajorCorpFinanceInfo.py
+   |-transform
+    |-Transformer.py
+    |-TransformerCorpcode.py
+   |-load
+    |-Loader.py
+    |-LoaderCorpcode.py
+   |-etl_pipeline
+    |-EtlPipeline.py
+    |-EtlPipelineCorpcode.py
+   |-etl_processor
+  |-domain
