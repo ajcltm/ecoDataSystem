@@ -1,6 +1,6 @@
 import unittest
 
-from etl.etl_pipeline import Etl_pipeline_corpcode
+from src.etl.etl_pipeline import Etl_pipeline_corpcode
 
 class Etl_pipeline_corpcode_test(unittest.TestCase):
 

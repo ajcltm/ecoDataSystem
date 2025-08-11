@@ -8,10 +8,7 @@ class Extracter_corpcodeinfo :
     def __init__(self):
         self.path = Path().cwd().joinpath("data", "raw", "dart", "CORPCODE.xml")
 
-    def extract(self) :
-        data =  Repository_corpcode().select_all()
-        # XML 파싱
-    
+    def parse_xml(self, data):
         root = data.getroot()
 
         # 첫 번째 레코드를 기준으로 컬럼명 추출
@@ -25,4 +22,10 @@ class Extracter_corpcodeinfo :
 
         # DataFrame 변환
         df = pd.DataFrame(data)
+        return df
+
+    def extract(self) :
+        data =  Repository_corpcode().select_all()
+        # XML 파싱
+        df = self.parse_xml(data)
         return df
