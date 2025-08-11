@@ -1,5 +1,4 @@
 import unittest
-
 from src.etl.extract.Extracter_corpcodeinfo import Extracter_corpcodeinfo
 
 class Extracter_corpcodeinfo_test(unittest.TestCase):
