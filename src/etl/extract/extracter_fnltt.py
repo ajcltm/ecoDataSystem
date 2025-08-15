@@ -6,7 +6,7 @@ class Extracter_fnltt:
     def __init__(self):
         self.url = f"https://opendart.fss.or.kr/api/fnlttMultiAcnt.json"
 
-    def fetch(self, corp_code, bsns_year="2023", reprt_code="11011"):
+    def fetch(self, corp_code, bsns_year, reprt_code):
         params = {"crtfc_key":config.api_key_dart, "corp_code":corp_code, "bsns_year":bsns_year, "reprt_code":reprt_code}
         data = Requestor().requests(url=self.url, params=params, return_type="json")
         return data
@@ -28,11 +28,11 @@ class Extracter_fnltt:
                 dic[key] = value
         return dic
     
-    def extract(self, corp_code, bsns_year="2023", reprt_code="11011"):
+    def extract(self, corp_code, bsns_year="2024", reprt_code="11011"):
         data = self.fetch(corp_code, bsns_year, reprt_code)
         if data.get("status") == "000":
             fs_div = self.check_fs_div(data)
             return self.get_report(data, fs_div, corp_code)
         else:
-            print(f"Error: {data.get('message')}")
+            print(f"corp_code: {corp_code} / Error: {data.get('message')}")
             return None

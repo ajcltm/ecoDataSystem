@@ -6,4 +6,4 @@ class Loader_corpcodeinfo:
         self.path = Path().cwd().joinpath("data", "ods", "corpcodeinfo.csv")
 
     def load(self, data):
-        data.to_csv(self.path, encoding="utf-8")
+        data.to_csv(self.path, encoding="utf-8", index=False)
