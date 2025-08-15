@@ -1,5 +1,0 @@
-application
-config
-etl
-etl_task
-repository
