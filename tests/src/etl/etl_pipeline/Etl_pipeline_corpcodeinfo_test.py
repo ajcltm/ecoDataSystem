@@ -1,5 +1,5 @@
 import unittest
-from src.etl.etl_pipeline.Etl_pipeline_corpcodeinfo import Etl_pipeline_corpcodeinfo
+from etl.etl_pipeline.etl_pipeline_corpcodeinfo import Etl_pipeline_corpcodeinfo
 
 class EtlPipelineCorpCodeInfoTest(unittest.TestCase):
     

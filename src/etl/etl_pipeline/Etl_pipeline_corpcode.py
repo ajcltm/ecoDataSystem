@@ -1,8 +1,8 @@
-from src.etl.extract import Extracter_corpcode
-from src.etl.load import Loader_corpcode
+from etl.extract import extracter_corpcode
+from etl.load import loader_corpcode
 
 class Etl_pipeline_corpcode:
 
     def execute(self):
-        data = Extracter_corpcode.Extracter_corpCode().extract()
-        Loader_corpcode.Loader_corpcode().load(data=data)
+        data = extracter_corpcode.Extracter_corpCode().extract()
+        loader_corpcode.Loader_corpcode().load(data=data)

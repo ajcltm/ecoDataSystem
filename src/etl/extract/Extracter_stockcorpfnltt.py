@@ -1,5 +1,5 @@
-from src.repository.Repository_corpcodeinfo import Repository_corpcodeinfo
-from src.etl.extract.Extracter_fnltt import Extracter_fnltt
+from repository.repository_corpcodeinfo import Repository_corpcodeinfo
+from etl.extract.extracter_fnltt import Extracter_fnltt
 import time
 import random
 import pandas as pd

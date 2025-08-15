@@ -1,5 +1,5 @@
-from ...etl_task.extract.Requestor import Requestor
-from src.config import config
+from etl_task.extract.requestor import Requestor
+from config import config
 
 class Extracter_corpCode :
 

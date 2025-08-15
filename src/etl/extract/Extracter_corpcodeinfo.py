@@ -1,6 +1,6 @@
 from pathlib import Path
 import xml.etree.ElementTree as ET
-from src.repository.Repository_corpcode import Repository_corpcode
+from repository.repository_corpcode import Repository_corpcode
 import pandas as pd
 
 class Extracter_corpcodeinfo :

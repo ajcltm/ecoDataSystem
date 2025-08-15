@@ -1,5 +1,5 @@
-from src.config import config
-from src.etl_task.extract.Requestor import Requestor
+from config import config
+from etl_task.extract.requestor import Requestor
 
 class Extracter_fnltt:
 
@@ -18,7 +18,6 @@ class Extracter_fnltt:
         return "OFS"
     
     def get_report(self, data, fs_div, corp_code):
-        print(f"Financial Statements Division: {fs_div}")
         dic = dict()
         dic["corp_code"] = corp_code
         dic["fs_div"] = fs_div
@@ -26,7 +25,6 @@ class Extracter_fnltt:
             if item.get("fs_div") == fs_div:
                 key = item.get("account_nm")
                 value = item.get("thstrm_amount")
-                print(f"{key}: {value}")
                 dic[key] = value
         return dic
     

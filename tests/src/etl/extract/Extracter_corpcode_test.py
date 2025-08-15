@@ -1,5 +1,5 @@
 import unittest
-from src.etl.extract.Extracter_corpcode import Extracter_corpCode
+from etl.extract.extracter_corpcode import Extracter_corpCode
 import zipfile
 import xml.etree.ElementTree as ET
 from io import BytesIO

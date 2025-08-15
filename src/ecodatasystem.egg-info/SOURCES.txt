@@ -12,6 +12,7 @@ src/etl/etl_pipeline/__init__.py
 src/etl/extract/Extracter_corpcode.py
 src/etl/extract/Extracter_corpcodeinfo.py
 src/etl/extract/Extracter_fnltt.py
+src/etl/extract/Extracter_stockcorpfnltt.py
 src/etl/extract/__init__.py
 src/etl/load/Loader_corpcode.py
 src/etl/load/Loader_corpcodeinfo.py
@@ -26,4 +27,5 @@ src/etl_task/intergration/__init__.py
 src/etl_task/staging/__init__.py
 src/etl_task/validation/__init__.py
 src/repository/Repository_corpcode.py
+src/repository/Repository_corpcodeinfo.py
 src/repository/__init__.py

@@ -1,4 +1,3 @@
-import xml.etree.ElementTree as ET
 import pandas as pd
 
 class Transformer_corpcodeinfo:
