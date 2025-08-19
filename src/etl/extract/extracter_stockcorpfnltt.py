@@ -7,6 +7,7 @@ from pathlib import Path
 import time
 import random
 import pandas as pd
+from tqdm import tqdm
 
 class Extracter_stockcorpfnltt:
 
@@ -24,15 +25,25 @@ class Extracter_stockcorpfnltt:
             print("No corporation code information available.")
             return None
 
-    def extract(self):
-        target = self.get_target_corpcode()
-        print(f"Target corporation codes: {target[:3]}...")
-        target = target[:3]
-        target.extend(["00126380", "00164742", "00164788"])
-        ex = Extracter_fnltt()
+    def extract(self, dataset=None, target=None):
+        if dataset is not None:
+            self.staging_path = Path.cwd().joinpath("data", "stage", dataset)
+        print(f"Staging path: {self.staging_path}")
+        ex_corp_code = []
+        ex_dataset = None
+        if self.staging_path.exists():
+            ex_dataset = load_pickle(self.staging_path.name)
+            ex_corp_code = [d['corp_code'] for d in ex_dataset]
+            print(f"Existing dataset found with {len(ex_corp_code)} entries.")
+        if target is not None:
+            target = self.get_target_corpcode()
+        print(f"Target corporation codes: {target[:3]}... : {len(target)} total")
 
         data = []
-        for corp_code in target:
+        for corp_code in tqdm(target, desc="Extracting data"):
+            if ex_dataset is not None and corp_code in ex_corp_code:
+                print(f"Data for {corp_code} already exists in staging.")
+                continue
             result = ex.extract(corp_code=corp_code)
             time.sleep(random.randint(1, 3))
             if result:

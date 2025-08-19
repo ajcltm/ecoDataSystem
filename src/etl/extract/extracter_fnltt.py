@@ -35,4 +35,4 @@ class Extracter_fnltt:
             return self.get_report(data, fs_div, corp_code)
         else:
             print(f"corp_code: {corp_code} / Error: {data.get('message')}")
-            return None
+            return {"corp_code": corp_code, "error": data.get("message")}
