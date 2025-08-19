@@ -34,5 +34,5 @@ class Extracter_fnltt:
             fs_div = self.check_fs_div(data)
             return self.get_report(data, fs_div, corp_code)
         else:
-            print(f"corp_code: {corp_code} / Error: {data.get('message')}")
+            # print(f"corp_code: {corp_code} / Error: {data.get('message')}")
             return {"corp_code": corp_code, "error": data.get("message")}

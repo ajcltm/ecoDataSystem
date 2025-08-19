@@ -4,7 +4,11 @@ class Requestor :
 
     def requests(self, url, params, return_type, method="get"):
         if method == "get" :
-            r = requests.get(url=url, params=params)
+            try:
+                r = requests.get(url=url, params=params, timeout=10)
+            except requests.exceptions.Timeout:
+                print("10초 초과, 프로그램 종료")
+                sys.exit(1)
         else :
             r = requests.post(url=url, params=params)
 

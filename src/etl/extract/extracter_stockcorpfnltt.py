@@ -35,14 +35,17 @@ class Extracter_stockcorpfnltt:
             ex_dataset = load_pickle(self.staging_path.name)
             ex_corp_code = [d['corp_code'] for d in ex_dataset]
             print(f"Existing dataset found with {len(ex_corp_code)} entries.")
-        if target is not None:
+        if target is None:
             target = self.get_target_corpcode()
         print(f"Target corporation codes: {target[:3]}... : {len(target)} total")
 
+        ex = Extracter_fnltt()
         data = []
+        if ex_dataset is not None:
+            data = ex_dataset
         for corp_code in tqdm(target, desc="Extracting data"):
-            if ex_dataset is not None and corp_code in ex_corp_code:
-                print(f"Data for {corp_code} already exists in staging.")
+            if corp_code in ex_corp_code:
+                # print(f"Data for {corp_code} already exists in staging.")
                 continue
             result = ex.extract(corp_code=corp_code)
             time.sleep(random.randint(1, 3))
@@ -50,5 +53,4 @@ class Extracter_stockcorpfnltt:
                 data.append(result)
                 save_pickle(data, self.staging_path.name)
         pkl = load_pickle(self.staging_path.name)
-        print(f"Data loaded from pickle: /n {pkl}")  #
-        return pd.DataFrame(data=data) if data else None
+        return pkl
