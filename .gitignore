@@ -1,2 +1,110 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-*
+################################
+# Python 기본
+################################
+__pycache__/
+*.py[cod]
+*$py.class
+
+################################
+# 가상환경
+################################
+.venv/
+venv/
+env/
+ENV/
+*.env
+.env.*
+Pipfile.lock
+poetry.lock
+
+################################
+# 빌드 / 배포 파일
+################################
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+################################
+# 테스트 / 커버리지
+################################
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+
+################################
+# 로그 & 임시 데이터
+################################
+*.log
+logs/
+*.sqlite3
+*.db
+tmp/
+temp/
+*.bak
+
+################################
+# Jupyter Notebook
+################################
+.ipynb_checkpoints/
+*.ipynb_convert
+jupyter_notebook_config.py
+
+################################
+# IDE / 편집기 설정
+################################
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+################################
+# OS 자동 생성 파일
+################################
+.DS_Store
+Thumbs.db
+
+################################
+# 데이터 파일 (민감 데이터 제외)
+################################
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.xls
+*.xlsx
+*.sav
+*.h5
+*.hdf5
+*.zip
+*.tar
+*.tar.gz
+
+################################
+# Node.js (풀스택 개발 시)
+################################
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+################################
+# Docker
+################################
+*.pid
+*.seed
+*.pid.lock
+docker-compose.override.yml
+
+################################
+# 기타
+################################
+*.swp
+*.swo
