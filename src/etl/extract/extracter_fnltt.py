@@ -17,10 +17,11 @@ class Extracter_fnltt:
                 return "CFS"
         return "OFS"
     
-    def get_report(self, data, fs_div, corp_code):
+    def get_report(self, data, fs_div, corp_code, bsns_year):
         dic = dict()
         dic["corp_code"] = corp_code
         dic["fs_div"] = fs_div
+        dic["bsns_year"] = bsns_year
         for item in data.get("list", []):
             if item.get("fs_div") == fs_div:
                 key = item.get("account_nm")
@@ -32,7 +33,7 @@ class Extracter_fnltt:
         data = self.fetch(corp_code, bsns_year, reprt_code)
         if data.get("status") == "000":
             fs_div = self.check_fs_div(data)
-            return self.get_report(data, fs_div, corp_code)
+            return self.get_report(data, fs_div, corp_code, bsns_year)
         else:
             # print(f"corp_code: {corp_code} / Error: {data.get('message')}")
             return {"corp_code": corp_code, "error": data.get("message")}

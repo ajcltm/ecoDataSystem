@@ -14,7 +14,8 @@ class Extracter_stockcorpfnltt:
     def __init__(self):
         self.repo = Repository_corpcodeinfo()
         day = datetime.now().strftime("%y%m%d_%H%M%S")
-        self.staging_path = Path.cwd().joinpath("data", "stage", f"{day} stockcorpfnltt.pkl")
+        self.bsns_year = "2024"
+        self.staging_path = Path.cwd().joinpath("data", "stage", f"{day} stockcorpfnltt_{self.bsns_year}.pkl")
 
     def get_target_corpcode(self):
         corp_code_info = self.repo.select_all()
@@ -25,7 +26,8 @@ class Extracter_stockcorpfnltt:
             print("No corporation code information available.")
             return None
 
-    def extract(self, dataset=None, target=None):
+    def extract(self, dataset=None, target=None, bsns_year='2024'):
+        self.bsns_year = bsns_year
         if dataset is not None:
             self.staging_path = Path.cwd().joinpath("data", "stage", dataset)
         print(f"Staging path: {self.staging_path}")
@@ -47,7 +49,7 @@ class Extracter_stockcorpfnltt:
             if corp_code in ex_corp_code:
                 # print(f"Data for {corp_code} already exists in staging.")
                 continue
-            result = ex.extract(corp_code=corp_code)
+            result = ex.extract(corp_code=corp_code, bsns_year=bsns_year)
             time.sleep(random.randint(1, 3))
             if result:
                 data.append(result)
